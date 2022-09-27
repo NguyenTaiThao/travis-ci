@@ -8,7 +8,7 @@ before_install:
   - docker build -t nguyentaithao/travis-ci -f Dockerfile.dev .
 
 script:
-  - docker run nguyentaithao/travis-ci npm run test -- --coverage
+  - docker run -e CI=true nguyentaithao/travis-ci npm run test
 
 deploy: 
   provider: elasticbeanstalk
@@ -19,6 +19,6 @@ deploy:
   bucket_path: "docker-react"
   on:
     branch: main
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key:
-      secure: "$AWS_SECRET_KEY"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+  secure: "$AWS_SECRET_KEY"
